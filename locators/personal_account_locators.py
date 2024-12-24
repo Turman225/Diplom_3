@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 class PersonalAccountLocators:
 
-    stellar_logo = (By.XPATH, '//a[@href="/"]')
+    stellar_logo = (By.XPATH, '//div[@class="AppHeader_header__logo__2D0X2"]')
     personal_account = (By.XPATH, '//a[@href="/account"]')  # Кнопка "Личный кабинет"
     order_history = (By.XPATH, '//a[@href="/account/order-history"]') #История заказов
     logout_btn = (By.XPATH, '//button[contains(text(), "Выход")]') #Кнопка ВЫХОД

@@ -2,6 +2,7 @@ import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -18,6 +19,13 @@ class BasePage:
 
     def find_elements(self, locator, condition=EC.visibility_of_any_elements_located):
         return WebDriverWait(self.driver, 20).until(condition(locator))
+
+    def find_element_by_text(self, text):
+        return WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(
+            (By.XPATH, f'//p[contains(text(), "{text}")]')))
+
+    def get_text(self, locator):
+        return self.find_element(locator, condition=EC.visibility_of_element_located).text
 
     # Ввод данных в поле
     def write_in_field(self, input=None, text=None):
