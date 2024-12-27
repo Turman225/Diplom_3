@@ -1,12 +1,11 @@
 from locators.tape_orders_locators import TapeOrdersLocators
 from locators.constructor_locators import ConstructorLocators
 from locators.personal_account_locators import PersonalAccountLocators
-from pages.constructor_page import ConstructorPage
-from pages.personal_account_page import PersonalAccountPage
+from pages.base_page import BasePage
 import allure
 
 
-class TapeOrdersPage(ConstructorPage, PersonalAccountPage):
+class TapeOrdersPage(BasePage):
 
     id = ''
     initial_count_all_times = ''
@@ -42,7 +41,6 @@ class TapeOrdersPage(ConstructorPage, PersonalAccountPage):
 
     @allure.step("Проверяем что созданный заказ появился в истории заказов")
     def check_created_order_has_in_order_history(self):
-        self.scroll_to_last_order()
         last_order_id = ''
         list_elem = self.find_elements(PersonalAccountLocators.ORDERS_ID_IN_HISTORY)
         if list_elem:

@@ -2,6 +2,7 @@ import pytest
 import driver_factory
 import data as data
 from pages.constructor_page import ConstructorPage
+from pages.login_page import LoginPage
 from pages.tape_orders_page import TapeOrdersPage
 from pages.recover_password_page import RecoverPasswordPage
 from pages.personal_account_page import PersonalAccountPage
@@ -38,4 +39,10 @@ def constructor_page(driver):
 def tape_orders_page(driver):
     # Создание объекта страницы с драйвером и URL
     page = TapeOrdersPage(driver, data.BASE_URL)
+    yield page
+
+@pytest.fixture()
+def login_page(driver):
+    # Создание объекта страницы с драйвером и URL
+    page = LoginPage(driver, data.BASE_URL)
     yield page

@@ -1,10 +1,10 @@
 from selenium.webdriver.support import expected_conditions as EC
 from locators.constructor_locators import ConstructorLocators
-from pages.login_page import LoginPage
+from pages.base_page import BasePage
 import allure
 
 
-class ConstructorPage(LoginPage):
+class ConstructorPage(BasePage):
 
     def click_constructor_btn(self):
         self.click_by_script(ConstructorLocators.CONSTRUCTOR_BTN)

@@ -1,11 +1,10 @@
 import data
 import allure
-from pages.login_page import LoginPage
+from pages.base_page import BasePage
 from locators.personal_account_locators import PersonalAccountLocators
-from pages.recover_password_page import RecoverPasswordPage
 
 
-class PersonalAccountPage(LoginPage, RecoverPasswordPage):
+class PersonalAccountPage(BasePage):
 
     def click_personal_acc_btn(self):
         self.click_by_script(PersonalAccountLocators.PERSONAL_ACCOUNT)
