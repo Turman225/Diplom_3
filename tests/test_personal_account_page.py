@@ -1,5 +1,6 @@
 import allure
 import data as data
+from locators.personal_account_locators import PersonalAccountLocators
 
 
 class TestPersonalAccount:
@@ -9,7 +10,7 @@ class TestPersonalAccount:
         personal_acc_page.open_page(data.BASE_URL)
         personal_acc_page.authorization(data.email, data.password)
         personal_acc_page.click_personal_acc_btn()
-        personal_acc_page.check_redirect_page(data.PROFILE_URL, personal_acc_page.profile_page_description)
+        personal_acc_page.check_redirect_page(data.PROFILE_URL, PersonalAccountLocators.PROFILE_PAGE_DESCRIPTION)
 
     @allure.title("Проверка отображения истории заказов")
     def test_open_orders_history(self, personal_acc_page):

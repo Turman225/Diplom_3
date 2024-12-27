@@ -4,20 +4,20 @@ from pages.login_page import LoginPage
 import allure
 
 
-class ConstructorPage(ConstructorLocators, LoginPage):
+class ConstructorPage(LoginPage):
 
     def click_constructor_btn(self):
-        self.click_by_script(ConstructorLocators.constructor_btn)
+        self.click_by_script(ConstructorLocators.CONSTRUCTOR_BTN)
 
     def click_tape_orders_btn(self):
-        self.click_by_script(ConstructorLocators.orders_tape_btn)
+        self.click_by_script(ConstructorLocators.ORDERS_TAPE_BTN)
 
     def click_to_bun(self):
-        self.find_element(ConstructorLocators.buns).click()
+        self.find_element(ConstructorLocators.BUNS).click()
 
     def click_create_order_btn(self):
-        self.click_by_script(ConstructorLocators.create_order_btn)
-        assert self.get_text(ConstructorLocators.order_status) == 'Ваш заказ начали готовить'
+        self.click_by_script(ConstructorLocators.CREATE_ORDER_BTN)
+        assert self.get_text(ConstructorLocators.ORDER_STATUS) == 'Ваш заказ начали готовить'
 
     def create_order(self):
         self.add_buns()
@@ -25,12 +25,12 @@ class ConstructorPage(ConstructorLocators, LoginPage):
 
     @allure.step("Закрываем модальное окно")
     def close_modal_window(self):
-        self.click_by_script(ConstructorLocators.close_modal_btn)
+        self.click_by_script(ConstructorLocators.CLOSE_MODAL_BTN)
 
     @allure.step("Добавляем булку в заказ")
     def add_buns(self):
-        ingredient = self.find_element(ConstructorLocators.buns)
-        basket_lst = self.find_element(ConstructorLocators.basket)
+        ingredient = self.find_element(ConstructorLocators.BUNS)
+        basket_lst = self.find_element(ConstructorLocators.BASKET)
         self.driver.execute_script(
             """
             const source = arguments[0];
@@ -52,23 +52,23 @@ class ConstructorPage(ConstructorLocators, LoginPage):
             ingredient,
             basket_lst
         )
-        assert self.get_text(ConstructorLocators.buns_counter) == '2', f'Фактический результат {self.get_text(ConstructorLocators.buns_counter)}'
+        assert self.get_text(ConstructorLocators.BUNS_COUNTER) == '2', f'Фактический результат {self.get_text(ConstructorLocators.BUNS_COUNTER)}'
 
     @allure.step("Проверяем что модальное окно открылось")
     def check_modal_window_details_displayed(self):
         self.click_to_bun()
-        assert self.get_text(ConstructorLocators.description_title) == 'Детали ингредиента'
+        assert self.get_text(ConstructorLocators.DESCRIPTION_TITLE) == 'Детали ингредиента'
 
     @allure.step("Проверяем что модальное окно закрылось")
     def check_modal_window_closed(self):
         self.close_modal_window()
-        assert self.find_element(ConstructorLocators.description_title, condition=EC.invisibility_of_element)
+        assert self.find_element(ConstructorLocators.DESCRIPTION_TITLE, condition=EC.invisibility_of_element)
 
     def check_redirect_nav_tab(self, url, elem):
         if elem == 'Конструктор':
             self.click_constructor_btn()
-            self.check_redirect_page(url, ConstructorPage.constructor_title)
+            self.check_redirect_page(url, ConstructorLocators.CONSTRUCTOR_TITLE)
         if elem == 'Лента заказов':
-            self.check_redirect_page(url, ConstructorPage.orders_tape_title)
+            self.check_redirect_page(url, ConstructorLocators.ORDERS_TAPE_TITLE)
             self.click_tape_orders_btn()
 
